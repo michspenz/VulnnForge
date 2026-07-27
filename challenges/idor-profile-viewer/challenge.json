@@ -1,0 +1,21 @@
+{
+  "slug": "idor-profile-viewer",
+  "name": "IDOR: Profile Viewer",
+  "category": "idor",
+  "difficulty": "beginner",
+  "owaspMapping": ["A01:2021-Broken Access Control"],
+  "mitreAttackMapping": [],
+  "flag": "VULNFORGE{idor_1s_ju5t_m1ss1ng_4uth}",
+  "estimatedMinutes": 20,
+  "learningObjectives": [
+    "Understand how Insecure Direct Object References (IDOR) occur when an application trusts a client-supplied identifier without checking whether the current user is allowed to access it",
+    "Practice identifying IDOR by manipulating an identifier in a request (URL, body, or query parameter) and observing whether access control is enforced",
+    "Understand the standard fix: enforce object-level authorization on every request, and consider using indirect reference maps instead of exposing raw database IDs"
+  ],
+  "hints": [
+    "Every request that fetches a profile includes some kind of identifier. What happens if you change just that value while keeping your own session cookie?",
+    "The app checks 'is someone logged in,' not 'does this ID belong to that someone.' Try incrementing or decrementing the identifier you see in your own profile URL."
+  ],
+  "description": "A small profile-viewing app lets a logged-in user view their own profile at /profile/<id>. The application authenticates the request, but never checks whether the id in the URL actually belongs to the logged-in user. Your goal: log in as one user, then use the app to read another user's private profile data without their credentials.",
+  "writeUpPath": "WRITEUP.md"
+}

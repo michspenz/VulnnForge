@@ -1,0 +1,70 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  LEARNER
+  ADMIN
+}
+
+model User {
+  id           String       @id @default(uuid())
+  email        String       @unique
+  username     String       @unique
+  passwordHash String
+  role         Role         @default(LEARNER)
+  createdAt    DateTime     @default(now())
+  submissions  Submission[]
+
+  @@map("users")
+}
+
+/// A queryable index of challenges, upserted at API boot from each
+/// challenges/<slug>/challenge.json file on disk. The filesystem is the
+/// source of truth (git history, PRs, authoring workflow); this table
+/// exists purely so the frontend can filter/search/paginate without the
+/// API re-reading and re-parsing every JSON file per request.
+model Challenge {
+  slug                String       @id
+  name                String
+  category            String
+  difficulty          String
+  owaspMapping        String[]
+  mitreAttackMapping  String[]
+  estimatedMinutes    Int
+  points              Int          @default(100)
+  description         String
+  learningObjectives  String[]
+  hints               String[]
+  writeUpPath         String
+  syncedAt            DateTime     @updatedAt
+  submissions         Submission[]
+
+  @@index([category])
+  @@index([difficulty])
+  @@map("challenges")
+}
+
+/// Every flag submission attempt, correct or not. A user has "solved" a
+/// challenge if at least one correct Submission exists for that pair —
+/// deliberately not a separate Progress table, to avoid two sources of
+/// truth for the same fact.
+model Submission {
+  id            String    @id @default(uuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  challengeSlug String
+  challenge     Challenge @relation(fields: [challengeSlug], references: [slug], onDelete: Cascade)
+  submittedFlag String
+  correct       Boolean
+  createdAt     DateTime  @default(now())
+
+  @@index([userId, challengeSlug])
+  @@map("submissions")
+}

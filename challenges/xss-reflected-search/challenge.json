@@ -1,0 +1,23 @@
+{
+  "slug": "xss-reflected-search",
+  "name": "Reflected XSS: Search Page",
+  "category": "xss",
+  "difficulty": "beginner",
+  "owaspMapping": [
+    "A03:2021-Injection"
+  ],
+  "mitreAttackMapping": [],
+  "flag": "VULNFORGE{r3fl3ct3d_xss_1s_st1ll_3v3rywh3r3}",
+  "estimatedMinutes": 20,
+  "learningObjectives": [
+    "Understand how unescaped user input reflected back into HTML lets an attacker inject arbitrary script",
+    "Practice crafting a payload that executes JavaScript in the victim's browser via a search query parameter",
+    "Understand the fix: context-aware output encoding and a strict Content-Security-Policy"
+  ],
+  "hints": [
+    "The search page echoes your query back onto the page as 'Results for: <your input>'. What if your input isn't just text?",
+    "Try a payload that injects a <script> tag or an event handler attribute, e.g. <img src=x onerror=alert(1)>"
+  ],
+  "description": "A search page reflects your query term back onto the results page without escaping it. Craft an input that causes arbitrary JavaScript to execute in your own browser when the page reflects it back.",
+  "writeUpPath": "WRITEUP.md"
+}

@@ -1,0 +1,23 @@
+{
+  "slug": "csrf-email-change",
+  "name": "CSRF: Unauthorized Email Change",
+  "category": "csrf",
+  "difficulty": "medium",
+  "owaspMapping": [
+    "A01:2021-Broken Access Control"
+  ],
+  "mitreAttackMapping": [],
+  "flag": "VULNFORGE{csrf_ch4ng3d_th3_v1ct1ms_3m41l}",
+  "estimatedMinutes": 25,
+  "learningObjectives": [
+    "Understand how a state-changing endpoint with no CSRF token lets an attacker forge a request on a logged-in victim's behalf",
+    "Practice building an auto-submitting HTML form that performs the forged request",
+    "Understand the fix: CSRF tokens, SameSite cookies, and origin/referer validation on state-changing requests"
+  ],
+  "hints": [
+    "Look at the account settings page's 'change email' form. Does the request it sends include anything besides your session cookie to prove you meant to send it?",
+    "Build a tiny HTML page with a hidden auto-submitting form pointed at that same endpoint, then imagine a victim visiting it while logged in."
+  ],
+  "description": "The account settings page lets a logged-in user change their email address. The endpoint trusts the session cookie alone with no CSRF token check. Build a proof-of-concept page that changes another logged-in user's email without their knowledge.",
+  "writeUpPath": "WRITEUP.md"
+}

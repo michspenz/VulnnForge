@@ -1,0 +1,25 @@
+{
+  "slug": "os-command-injection-ping",
+  "name": "OS Command Injection: Network Diagnostic Tool",
+  "category": "command-injection",
+  "difficulty": "medium",
+  "owaspMapping": [
+    "A03:2021-Injection"
+  ],
+  "mitreAttackMapping": [
+    "T1059"
+  ],
+  "flag": "VULNFORGE{c0mm4nd_1nj3ct10n_v14_p1ng}",
+  "estimatedMinutes": 30,
+  "learningObjectives": [
+    "Understand how a feature that shells out to a system command (like ping) with unsanitized user input lets an attacker inject arbitrary OS commands",
+    "Practice using shell metacharacters to append your own command onto the intended one",
+    "Understand the fix: avoid shelling out entirely where possible, and if unavoidable, use an allowlist of arguments plus a non-shell exec call rather than string concatenation"
+  ],
+  "hints": [
+    "The 'network diagnostics' page lets you enter a hostname and runs a ping command against it server-side. What if your input contains a shell metacharacter like ; or && or |?",
+    "Try appending a second, unrelated command after a shell separator \u2014 e.g. an input like 8.8.8.8; whoami \u2014 and see whether its output shows up too."
+  ],
+  "description": "A network diagnostics page runs a ping command against whatever hostname you provide, server-side, by shelling out directly. Find an input that injects and executes an additional OS command of your choosing.",
+  "writeUpPath": "WRITEUP.md"
+}

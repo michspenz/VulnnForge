@@ -1,0 +1,23 @@
+{
+  "slug": "cors-misconfigured-api",
+  "name": "CORS Misconfiguration: Reflected Origin",
+  "category": "cors",
+  "difficulty": "medium",
+  "owaspMapping": [
+    "A05:2021-Security Misconfiguration"
+  ],
+  "mitreAttackMapping": [],
+  "flag": "VULNFORGE{c0rs_r3fl3ct3d_0r1g1n_st0l3_d4t4}",
+  "estimatedMinutes": 25,
+  "learningObjectives": [
+    "Understand how a CORS policy that reflects any request's Origin header back with credentials allowed lets any website read another user's authenticated data",
+    "Practice building a malicious page that uses fetch() with credentials to steal data cross-origin",
+    "Understand the fix: an explicit allowlist of trusted origins, never a blanket reflection of the request's own Origin header"
+  ],
+  "hints": [
+    "Check the response headers on an API request \u2014 specifically Access-Control-Allow-Origin and Access-Control-Allow-Credentials. What do you notice about how the Allow-Origin value is generated?",
+    "If the server reflects whatever Origin you send back as the allowed origin, and also allows credentials, a page hosted anywhere can read a logged-in victim's data via a credentialed fetch() request."
+  ],
+  "description": "An internal API reflects whatever Origin header a request sends back as the Access-Control-Allow-Origin value, and sets Access-Control-Allow-Credentials: true. Build a proof-of-concept page hosted on a different origin that reads a logged-in victim's private data.",
+  "writeUpPath": "WRITEUP.md"
+}

@@ -1,0 +1,23 @@
+{
+  "slug": "unrestricted-file-upload",
+  "name": "Unrestricted File Upload: Avatar Handler",
+  "category": "file-upload",
+  "difficulty": "hard",
+  "owaspMapping": [
+    "A05:2021-Security Misconfiguration"
+  ],
+  "mitreAttackMapping": [],
+  "flag": "VULNFORGE{uploaded_4_w3bsh3ll_g0t_rc3}",
+  "estimatedMinutes": 40,
+  "learningObjectives": [
+    "Understand how an avatar upload feature that only checks the file extension (not real content type) lets an attacker upload executable server-side code",
+    "Practice bypassing weak extension-based validation and getting a malicious file placed in a web-servable directory",
+    "Understand the fix: validate actual file content/magic bytes, store uploads outside the web root, and never execute uploaded files as code"
+  ],
+  "hints": [
+    "The upload handler checks that the filename ends in an image extension, but does it check what's actually inside the file, or where the file ends up being served from?",
+    "If uploaded files land in a directory the web server will execute scripts from, a file that just happens to have an image extension but contains server-side code might still run if you can reach it directly."
+  ],
+  "description": "An avatar upload feature only validates that the filename ends in .jpg/.png \u2014 nothing about the actual file content, and uploads land in a publicly web-servable directory. Find a way to get server-side code to execute via this upload.",
+  "writeUpPath": "WRITEUP.md"
+}

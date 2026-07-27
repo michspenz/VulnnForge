@@ -1,0 +1,23 @@
+{
+  "slug": "jwt-alg-none",
+  "name": "Broken Auth: JWT alg=none",
+  "category": "jwt",
+  "difficulty": "hard",
+  "owaspMapping": [
+    "A07:2021-Identification and Authentication Failures"
+  ],
+  "mitreAttackMapping": [],
+  "flag": "VULNFORGE{jwt_4lg_n0n3_f0rg3d_4dm1n}",
+  "estimatedMinutes": 35,
+  "learningObjectives": [
+    "Understand how a JWT verification library that trusts the token's own 'alg' header can be tricked into skipping signature verification entirely",
+    "Practice decoding, modifying, and re-encoding a JWT to escalate privileges without knowing the signing secret",
+    "Understand the fix: the server must whitelist accepted algorithms itself, never trust the algorithm named in the token"
+  ],
+  "hints": [
+    "A JWT is three base64url segments separated by dots: header.payload.signature. Try decoding just the header and payload \u2014 no secret needed for that part.",
+    "Some JWT libraries, if misconfigured, will accept a token whose header says '\"alg\":\"none\"' and skip signature verification entirely. What happens if you set that header and just... remove the signature?"
+  ],
+  "description": "This app authenticates using JWTs, and issues you a token with the role 'user'. The server-side verification logic has a flaw: it trusts the algorithm declared in the token's own header rather than enforcing one itself. Forge a token that grants you the 'admin' role.",
+  "writeUpPath": "WRITEUP.md"
+}

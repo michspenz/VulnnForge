@@ -1,0 +1,23 @@
+{
+  "slug": "sql-injection-login",
+  "name": "SQL Injection: Login Bypass",
+  "category": "sqli",
+  "difficulty": "beginner",
+  "owaspMapping": [
+    "A03:2021-Injection"
+  ],
+  "mitreAttackMapping": [],
+  "flag": "VULNFORGE{sq1_1nj3ct10n_byp4ss3d_4uth}",
+  "estimatedMinutes": 25,
+  "learningObjectives": [
+    "Understand how unsanitized user input concatenated into a SQL query lets an attacker alter the query's logic",
+    "Practice bypassing a login form using a classic SQL injection payload",
+    "Understand the fix: parameterized queries / prepared statements, never string-concatenated SQL"
+  ],
+  "hints": [
+    "The login query probably looks like: SELECT * FROM users WHERE username='<input>' AND password='<input>'. What happens if your input contains a quote?",
+    "A classic payload closes the string early and comments out the rest of the query. Try something involving ' OR '1'='1"
+  ],
+  "description": "A login form takes a username and password and builds a SQL query by directly concatenating your input into the query string. Find an input that makes the query always evaluate to true, letting you log in without knowing a valid password.",
+  "writeUpPath": "WRITEUP.md"
+}

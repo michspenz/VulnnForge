@@ -1,0 +1,23 @@
+{
+  "slug": "ssrf-image-fetcher",
+  "name": "SSRF: Internal Image Fetcher",
+  "category": "ssrf",
+  "difficulty": "medium",
+  "owaspMapping": [
+    "A10:2021-Server-Side Request Forgery"
+  ],
+  "mitreAttackMapping": [],
+  "flag": "VULNFORGE{ssrf_r3ach3d_th3_1nt3rn4l_4p1}",
+  "estimatedMinutes": 30,
+  "learningObjectives": [
+    "Understand how a server-side 'fetch this URL for me' feature can be abused to reach internal-only services",
+    "Practice pivoting an SSRF into reaching a metadata/internal endpoint not meant to be reachable from outside",
+    "Understand the fix: allowlisting destination hosts, blocking internal IP ranges, and disabling redirects on the fetch"
+  ],
+  "hints": [
+    "The app has a feature that fetches an image from any URL you provide and displays it. What if the URL points somewhere other than the public internet?",
+    "Internal-only services are often reachable at predictable addresses like 127.0.0.1 or 169.254.169.254 from the server's own perspective, even though your browser can't reach them directly."
+  ],
+  "description": "An 'import profile picture from URL' feature fetches whatever URL you provide, server-side, and displays the result. Find a URL that makes the server reach an internal service it was never meant to expose to you.",
+  "writeUpPath": "WRITEUP.md"
+}
