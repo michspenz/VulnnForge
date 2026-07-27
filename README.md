@@ -8,7 +8,7 @@ fixing, and understanding real-world web application vulnerabilities.
 
 VulnForge combines the training format of PortSwigger Web Security Academy and
 HTB Academy with the self-hosted, open-source spirit of OWASP Juice Shop and
-DVWA — but built as a reusable **platform**, not a fixed set of vulnerable
+DVWA but built as a reusable **platform**, not a fixed set of vulnerable
 apps. Every vulnerability is a plugin that snaps into the same challenge
 engine, and every challenge supports three modes: **Exploit**, **Patch**, and
 **Verify**.
