@@ -85,24 +85,3 @@ http://localhost:5173
 
 
 
-## Documentation
-
-More detailed documentation can be found in:
-
-- docs/OVERVIEW.md
-- docs/ARCHITECTURE.md
-- docs/ROADMAP.md
-- CONTRIBUTING.md
-- SECURITY.md
-
----
-
-## Roadmap
-
-- Authentication
-- Dynamic Lab Deployment
-- Progress Tracking
-- Leaderboards
-- Team Challenges
-- Hint Engine
-
