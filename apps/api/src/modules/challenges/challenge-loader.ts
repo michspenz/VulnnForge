@@ -70,7 +70,9 @@ export async function syncChallengesFromDisk(): Promise<SyncResult> {
 
     const validation = challengeMetadataSchema.safeParse(parsedJson);
     if (!validation.success) {
-      const issues = validation.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`);
+      const issues = validation.error.issues.map(
+        (i: { path: (string | number)[]; message: string }) => `${i.path.join('.')}: ${i.message}`,
+      );
       result.failed.push({ dir: dirName, error: issues.join('; ') });
       continue;
     }

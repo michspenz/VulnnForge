@@ -1,12 +1,11 @@
 import express, { type Express, type Request, type Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import pinoHttp from 'pino-http';
+import { pinoHttp } from 'pino-http';
 import cookieParser from 'cookie-parser';
 import { authRouter } from './modules/auth/auth.routes.js';
 import { challengesRouter } from './modules/challenges/challenges.routes.js';
 import { submissionsRouter } from './modules/submissions/submissions.routes.js';
-import { leaderboardRouter } from './modules/leaderboard/leaderboard.routes.js';
 import { leaderboardRouter } from './modules/leaderboard/leaderboard.routes.js';
 
 /**
@@ -30,7 +29,6 @@ export function createApp(): Express {
   app.use('/api/auth', authRouter);
   app.use('/api/challenges', challengesRouter);
   app.use('/api/submissions', submissionsRouter);
-  app.use('/api/leaderboard', leaderboardRouter);
   app.use('/api/leaderboard', leaderboardRouter);
 
   return app;

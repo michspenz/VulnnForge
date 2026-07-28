@@ -40,7 +40,7 @@ export function DashboardPage() {
   );
   const owaspCategoryCount = useMemo(() => {
     const codes = new Set<string>();
-    challenges.forEach((c) => c.owaspMapping.forEach((m) => codes.add(m.split(':')[0])));
+    challenges.forEach((c) => c.owaspMapping.forEach((m) => codes.add(m.split(':')[0] ?? m)));
     return codes.size;
   }, [challenges]);
 

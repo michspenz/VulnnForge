@@ -53,7 +53,9 @@ export async function authenticateUser(input: LoginRequest) {
 }
 
 export function signAuthToken(payload: AuthTokenPayload): string {
-  return jwt.sign(payload, config.JWT_SECRET, { expiresIn: config.JWT_EXPIRES_IN });
+  return jwt.sign(payload, config.JWT_SECRET, {
+    expiresIn: config.JWT_EXPIRES_IN as jwt.SignOptions['expiresIn'],
+  });
 }
 
 export function verifyAuthToken(token: string): AuthTokenPayload {

@@ -25,7 +25,9 @@ export function TerminalPreview({ lines }: { lines: TerminalLine[] }) {
 
     function typeNextLine() {
       if (cancelled || indexRef.current >= lines.length) return;
-      const line = lines[indexRef.current];
+      const current = lines[indexRef.current];
+      if (!current) return;
+      const line: TerminalLine = current;
       charIndex = 0;
 
       function typeChar() {

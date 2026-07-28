@@ -9,7 +9,7 @@ export function OwaspCoverageChart({ challenges }: { challenges: Challenge[] }) 
   const counts = new Map<string, number>();
   for (const c of challenges) {
     for (const mapping of c.owaspMapping) {
-      const code = mapping.split(':')[0];
+      const code = mapping.split(':')[0] ?? mapping;
       counts.set(code, (counts.get(code) ?? 0) + 1);
     }
   }

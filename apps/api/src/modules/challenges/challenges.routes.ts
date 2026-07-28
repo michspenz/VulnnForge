@@ -62,6 +62,10 @@ challengesRouter.get('/:slug', attachUserIfPresent, async (req: Request, res: Re
  */
 challengesRouter.get('/:slug/writeup', requireAuth, async (req: Request, res: Response) => {
   const { slug } = req.params;
+  if (!slug) {
+    res.status(400).json({ error: 'Missing challenge slug' });
+    return;
+  }
   const forceReveal = req.query.reveal === 'true';
 
   const challenge = await prisma.challenge.findUnique({ where: { slug } });
